@@ -87,9 +87,9 @@ export default {
 			this.raycaster.setFromCamera(this.mouse, this.camera);
 			const intersects = this.raycaster.intersectObjects(this.plates);
 			if (intersects.length > 0) {
-				// if right clicking, delete
+				// if left clicking, delete
 				const intersect = intersects[0];
-				if (event.button === 2) {
+				if (event.button === 1) {
 					if (intersect.object !== this.gridFloor) {
 						const currentPlate = this.plates[this.plates.indexOf(intersect.object)];
 						this.plates[this.plates.indexOf(intersect.object)].mixer = new THREE.AnimationMixer(intersect.object);
@@ -105,7 +105,7 @@ export default {
 							}
 						}, 300);
 					}
-				} else {
+				} else if (event.button === 2) {
 					const voxel = new THREE.Mesh(geometry, material);
 					voxel.position.copy(intersect.point).add(intersect.face.normal);
 					voxel.position.divideScalar(16).floor().multiplyScalar(16).addScalar(8);
