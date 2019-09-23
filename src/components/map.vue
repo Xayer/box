@@ -20,6 +20,7 @@
 			z-index: 1;
 		}
 		footer, header {
+			text-align: left;
 			z-index: 2;
 			color: #000;
 			position: absolute;
