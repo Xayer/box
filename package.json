@@ -10,6 +10,8 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "register-service-worker": "^1.6.2",
+    "three": "^0.108.0",
+    "three-orbitcontrols": "^2.108.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3"
   },
@@ -36,7 +38,17 @@
       "plugin:vue/essential",
       "@vue/airbnb"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": "off",
+      "no-debugger": "off",
+      "import/no-extraneous-dependencies": "off",
+      "import/no-dynamic-require": "off",
+      "indent": ["error", "tab"],
+      "no-tabs": "off",
+      "max-len": "off",
+      "class-methods-use-this": "off",
+      "no-prototype-builtins": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

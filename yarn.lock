@@ -8508,6 +8508,21 @@ thread-loader@^2.1.2:
     loader-utils "^1.1.0"
     neo-async "^2.6.0"
 
+three-orbit-controls@^82.1.0:
+  version "82.1.0"
+  resolved "https://registry.yarnpkg.com/three-orbit-controls/-/three-orbit-controls-82.1.0.tgz#11a7f33d0a20ecec98f098b37780f6537374fab4"
+  integrity sha1-EafzPQog7OyY8Jizd4D2U3N0+rQ=
+
+three-orbitcontrols@^2.108.1:
+  version "2.108.1"
+  resolved "https://registry.yarnpkg.com/three-orbitcontrols/-/three-orbitcontrols-2.108.1.tgz#3b7877390ee5cde151805646064de3c0be313474"
+  integrity sha512-822+Y0iI4Hi9iNC4Rnfp3vP68yHYdeNtpUHI+/43eihe7UzH+26uiP0ISWDH9/T4hNpGYt+JDxf5cGLV0TeZ8Q==
+
+three@^0.108.0:
+  version "0.108.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.108.0.tgz#53d26597c7932f214bb43f4655e566d2058143b5"
+  integrity sha512-d1ysIXwi8qTlbmMwrTxi5pYiiYIflEr0e48krP0LAY8ndS8c6fkLHn6NvRT+o76/Fs9PBLxFViuI62iGVWwwlg==
+
 through2@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.5.tgz#01c1e39eb31d07cb7d03a96a70823260b23132cd"
