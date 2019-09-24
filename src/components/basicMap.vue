@@ -115,20 +115,19 @@ export default {
 			if (this.selectedType === 'slab') {
 				geometry = new THREE.BoxBufferGeometry(16, 8, 16);
 			}
-			if (this.selectedType === 'torch') {
+			if (this.selectedType === 'column') {
 				geometry = new THREE.BoxBufferGeometry(8, 16, 8);
 			}
 			const color = new THREE.Color(this.selectedColor);
-			const material = new THREE.MeshPhongMaterial({ color });
+			const material = new THREE.MeshToonMaterial({ color });
+			material.receiveShadow = true;
 			const voxel = new THREE.Mesh(geometry, material);
 			voxel.position.copy(intersect.point).add(intersect.face.normal);
 			voxel.position.divideScalar(16).floor().multiplyScalar(16).addScalar(8);
-			if (this.selectedType === 'torch') {
-				const light = new THREE.PointLight(0xffffff, 5, 20, 10);
+			if (this.selectedType === 'column') {
+				const light = new THREE.PointLight(0xffffff, 5, 10, 2);
 				voxel.add(light);
-				light.position.set(0, 0, 0);
-				const lightHelper = new THREE.PointLightHelper(light, 3, 'red');
-				voxel.add(lightHelper);
+				light.position.set(0, 14, 0);
 			}
 			this.scene.add(voxel);
 			this.plates.push(voxel);

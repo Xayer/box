@@ -130,27 +130,29 @@ export default {
 			raycaster: {},
 			controls: [],
 			colors: [
-				'#75DBCD',
-				'#C9DBBA',
-				'#DCDBA8',
-				'#F5CDA7',
+				'#50822D',
+				'#4B94CC',
+				'#6B4F41',
+				'#EDDDB4',
+				'#7A7A7A',
 				'#FAA381',
 			],
 			selectedColor: '',
 			blockTypes: [
 				'block',
 				'slab',
-				'torch',
+				'column',
 			],
-			selectedType: 'torch',
+			selectedType: 'block',
 		};
 	},
 	methods: {
 		addStartupFloor() {
-			const material = new THREE.MeshBasicMaterial({
-				color: this.colors[1],
+			const material = new THREE.MeshToonMaterial({
+				color: this.colors[0],
 			});
-			const geometry = new THREE.BoxGeometry(16, 8, 16);
+			material.receiveShadow = true;
+			const geometry = new THREE.BoxGeometry(16, 16, 16);
 			const floorCoordinates = [
 				new THREE.Vector3(-8, -8, 8),
 				new THREE.Vector3(8, -8, 8),
@@ -199,9 +201,13 @@ export default {
 			controls.minDistance = 1000;
 			controls.maxDistance = 5000;
 
-			const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.95);
-			light.rotateY(THREE.Math.degToRad(30));
+			const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.5);
+			light.position.set(0, 50, 0);
 			this.scene.add(light);
+			const directionalLight = new THREE.DirectionalLight(0xffffff, 0.75);
+			directionalLight.position.set(-10, 20, 40);
+			this.scene.add(directionalLight);
+			directionalLight.position.multiplyScalar(30);
 		},
 		addGrid() {
 			// GridHelper helper
@@ -209,10 +215,6 @@ export default {
 			this.GridHelper.rotation.x = 1.570795;
 			this.GridHelper.z = 1;
 			this.scene.add(this.GridHelper);
-			/* let secondGrid = new THREE.GridHelper(100, 100, 0x000000, 0x9a9a9a);
-			secondGrid.rotation.x = 1.570795;
-			secondGrid.position.z = 1;
-			this.scene.add(secondGrid); */
 
 			const geometry = new THREE.PlaneBufferGeometry(1024, 1024);
 			this.gridFloor = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ visible: false }));
