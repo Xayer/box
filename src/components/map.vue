@@ -3,6 +3,13 @@
 		<header>
 			<span>{{ mouse }}</span>
 			<span>{{ this.plates.length - 1}} Blocks</span>
+			<ul>
+				<li v-for="(color, index) in colors"
+				:key="index"
+				@click="selectedColor = colors[index]"
+				v-bind:style="{backgroundColor: color}"
+				></li>
+			</ul>
 		</header>
 		<footer>
 			<strong>controls</strong>
@@ -24,6 +31,9 @@
 			z-index: 2;
 			color: #000;
 			position: absolute;
+			background-color: rgba(255,255,255,.75);
+			border: 5px solid #333;
+			padding: 0.5rem;
 			bottom: 10px;
 			left: 10px;
 			span {
@@ -34,7 +44,19 @@
 		header {
 			top: 10px;
 			left: 10px;
-			bottom: 0;
+			bottom: initial;
+			ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				li {
+					display: inline-block;
+					margin-right: 5px;
+					width: 1.5rem;
+					height: 1.5rem;
+					background-color: red;
+				}
+			}
 		}
 	}
 </style>
@@ -47,6 +69,7 @@ export default {
 		this.container = this.$refs.map;
 		this.containerSize = this.container.getBoundingClientRect();
 		this.mouse = new THREE.Vector3(0, 0, 1);
+		this.selectedColor = this.colors[0];
 		this.setupClock();
 		this.setupScene();
 		this.setupRenderer(this.container);
@@ -79,6 +102,14 @@ export default {
 			plates: [],
 			raycaster: {},
 			controls: [],
+			colors: [
+				'#75DBCD',
+				'#C9DBBA',
+				'#DCDBA8',
+				'#F5CDA7',
+				'#FAA381',
+			],
+			selectedColor: '',
 		};
 	},
 	methods: {

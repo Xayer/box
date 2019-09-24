@@ -8508,11 +8508,6 @@ thread-loader@^2.1.2:
     loader-utils "^1.1.0"
     neo-async "^2.6.0"
 
-three-orbit-controls@^82.1.0:
-  version "82.1.0"
-  resolved "https://registry.yarnpkg.com/three-orbit-controls/-/three-orbit-controls-82.1.0.tgz#11a7f33d0a20ecec98f098b37780f6537374fab4"
-  integrity sha1-EafzPQog7OyY8Jizd4D2U3N0+rQ=
-
 three-orbitcontrols@^2.108.1:
   version "2.108.1"
   resolved "https://registry.yarnpkg.com/three-orbitcontrols/-/three-orbitcontrols-2.108.1.tgz#3b7877390ee5cde151805646064de3c0be313474"

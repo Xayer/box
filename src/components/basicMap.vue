@@ -81,8 +81,6 @@ export default {
 		},
 		click(event) {
 			event.preventDefault();
-			const geometry = new THREE.BoxBufferGeometry(16, 16, 16);
-			const material = new THREE.MeshPhongMaterial({ color: 0xfeb74c });
 
 			this.raycaster.setFromCamera(this.mouse, this.camera);
 			const intersects = this.raycaster.intersectObjects(this.plates);
@@ -107,15 +105,21 @@ export default {
 					}
 				// right clicking, add block
 				} else if (event.button === 2) {
-					const voxel = new THREE.Mesh(geometry, material);
-					voxel.position.copy(intersect.point).add(intersect.face.normal);
-					voxel.position.divideScalar(16).floor().multiplyScalar(16).addScalar(8);
-					this.scene.add(voxel);
-					this.plates.push(voxel);
-					this.render();
+					this.createBlock(intersect);
 				}
 			}
 			this.camera.updateProjectionMatrix();
+		},
+		createBlock(intersect) {
+			const geometry = new THREE.BoxBufferGeometry(16, 16, 16);
+			const color = new THREE.Color(this.selectedColor);
+			const material = new THREE.MeshPhongMaterial({ color });
+			const voxel = new THREE.Mesh(geometry, material);
+			voxel.position.copy(intersect.point).add(intersect.face.normal);
+			voxel.position.divideScalar(16).floor().multiplyScalar(16).addScalar(8);
+			this.scene.add(voxel);
+			this.plates.push(voxel);
+			this.render();
 		},
 		keyDown(event) {
 			if (event.key === 'g') {
