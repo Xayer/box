@@ -123,6 +123,13 @@ export default {
 			const voxel = new THREE.Mesh(geometry, material);
 			voxel.position.copy(intersect.point).add(intersect.face.normal);
 			voxel.position.divideScalar(16).floor().multiplyScalar(16).addScalar(8);
+			if (this.selectedType === 'torch') {
+				const light = new THREE.PointLight(0xffffff, 5, 20, 10);
+				voxel.add(light);
+				light.position.set(0, 0, 0);
+				const lightHelper = new THREE.PointLightHelper(light, 3, 'red');
+				voxel.add(lightHelper);
+			}
 			this.scene.add(voxel);
 			this.plates.push(voxel);
 			this.render();

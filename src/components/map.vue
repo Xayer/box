@@ -105,6 +105,7 @@ export default {
 		this.addHelperPosition();
 		this.addRaycaster();
 		this.addControls();
+		this.addStartupFloor();
 		this.container.appendChild(this.Renderer.domElement);
 		this.startAnimationFrames();
 	},
@@ -141,10 +142,26 @@ export default {
 				'slab',
 				'torch',
 			],
-			selectedType: 'block',
+			selectedType: 'torch',
 		};
 	},
 	methods: {
+		addStartupFloor() {
+			const material = new THREE.MeshBasicMaterial({
+				color: this.colors[1],
+			});
+			const geometry = new THREE.BoxGeometry(16, 8, 16);
+			const floorCoordinates = [
+				new THREE.Vector3(-8, -8, 8),
+				new THREE.Vector3(8, -8, 8),
+			];
+
+			floorCoordinates.forEach((coordinates) => {
+				const floorMesh = new THREE.Mesh(geometry, material);
+				floorMesh.position.copy(coordinates);
+				this.scene.add(floorMesh);
+			});
+		},
 		addControls() {
 			this.controls.push(
 				{ G: 'Toggle grid' },
@@ -182,7 +199,7 @@ export default {
 			controls.minDistance = 1000;
 			controls.maxDistance = 5000;
 
-			const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.75);
+			const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.95);
 			light.rotateY(THREE.Math.degToRad(30));
 			this.scene.add(light);
 		},
