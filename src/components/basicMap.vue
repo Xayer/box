@@ -111,7 +111,13 @@ export default {
 			this.camera.updateProjectionMatrix();
 		},
 		createBlock(intersect) {
-			const geometry = new THREE.BoxBufferGeometry(16, 16, 16);
+			let geometry = new THREE.BoxBufferGeometry(16, 16, 16);
+			if (this.selectedType === 'slab') {
+				geometry = new THREE.BoxBufferGeometry(16, 8, 16);
+			}
+			if (this.selectedType === 'torch') {
+				geometry = new THREE.BoxBufferGeometry(8, 16, 8);
+			}
 			const color = new THREE.Color(this.selectedColor);
 			const material = new THREE.MeshPhongMaterial({ color });
 			const voxel = new THREE.Mesh(geometry, material);

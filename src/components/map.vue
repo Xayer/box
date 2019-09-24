@@ -1,13 +1,24 @@
 <template>
 	<div id="map" ref="map">
 		<header>
-			<span>{{ mouse }}</span>
+			<span>Coordinates</span>
+			<span>X: {{ mouse.x}}</span>
+			<span>Y: {{ mouse.y}}</span>
 			<span>{{ this.plates.length - 1}} Blocks</span>
-			<ul>
+			<span>Color</span>
+			<ul class="colors">
 				<li v-for="(color, index) in colors"
 				:key="index"
+				:class="{'selected': selectedColor === color}"
 				@click="selectedColor = colors[index]"
 				v-bind:style="{backgroundColor: color}"
+				></li>
+			</ul>
+			<span>Type</span>
+			<ul class="type">
+				<li v-for="(type, index) in blockTypes"
+				:key="index" :class="{'selected': selectedType === type}"
+				@click="selectedType = blockTypes[index]" v-text="type"
 				></li>
 			</ul>
 		</header>
@@ -38,6 +49,7 @@
 			left: 10px;
 			span {
 				display: block;
+				margin-bottom: 0.5rem;
 			}
 		}
 
@@ -52,9 +64,23 @@
 				li {
 					display: inline-block;
 					margin-right: 5px;
+				}
+				&.colors li {
 					width: 1.5rem;
 					height: 1.5rem;
-					background-color: red;
+					cursor: pointer;
+					&.selected {
+						box-shadow: 0px 0px 1px 3px inset #000;
+					}
+				}
+				&.type li {
+					cursor: pointer;
+					border: 1px solid #555;
+					padding: 0.5rem;
+					&.selected {
+						background-color: #555;
+						color: #FFF;
+					}
 				}
 			}
 		}
@@ -110,6 +136,12 @@ export default {
 				'#FAA381',
 			],
 			selectedColor: '',
+			blockTypes: [
+				'block',
+				'slab',
+				'torch',
+			],
+			selectedType: 'block',
 		};
 	},
 	methods: {
@@ -150,7 +182,8 @@ export default {
 			controls.minDistance = 1000;
 			controls.maxDistance = 5000;
 
-			const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+			const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.75);
+			light.rotateY(THREE.Math.degToRad(30));
 			this.scene.add(light);
 		},
 		addGrid() {
