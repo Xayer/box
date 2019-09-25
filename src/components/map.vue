@@ -142,6 +142,7 @@ export default {
 				'block',
 				'slab',
 				'column',
+				'torch',
 			],
 			selectedType: 'block',
 		};

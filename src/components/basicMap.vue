@@ -118,19 +118,28 @@ export default {
 			if (this.selectedType === 'column') {
 				geometry = new THREE.BoxBufferGeometry(8, 16, 8);
 			}
+			if (this.selectedType === 'torch') {
+				geometry = new THREE.BoxBufferGeometry(4, 12, 4);
+			}
 			const color = new THREE.Color(this.selectedColor);
 			const material = new THREE.MeshToonMaterial({ color });
 			material.receiveShadow = true;
 			const voxel = new THREE.Mesh(geometry, material);
 			voxel.position.copy(intersect.point).add(intersect.face.normal);
 			voxel.position.divideScalar(16).floor().multiplyScalar(16).addScalar(8);
-			if (this.selectedType === 'column') {
-				const light = new THREE.PointLight(0xffffff, 5, 10, 2);
-				voxel.add(light);
-				light.position.set(0, 14, 0);
-			}
+
 			this.scene.add(voxel);
 			this.plates.push(voxel);
+			if (this.selectedType === 'torch') {
+				voxel.position.divideScalar(16).floor().multiplyScalar(16).addScalar(8);
+				console.log(voxel.position);
+				/* const light = new THREE.PointLight(0xffffff, 5, 10, 2); */
+				const flameGeometry = new THREE.SphereGeometry(3, 3, 2);
+				const flameMaterial = new THREE.MeshToonMaterial({ color: 'orange', opacity: 0.5, transparent: true });
+				const flame = new THREE.Mesh(flameGeometry, flameMaterial);
+				voxel.add(flame);
+				flame.position.set(0, 8, 0);
+			}
 			this.render();
 		},
 		keyDown(event) {
