@@ -5,7 +5,7 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
-    <footer>made by <a href="//rabol.net">Frederik Rab&oslash;l</a></footer>
+    <footer>made by <a href="//rabol.co">Frederik Rab&oslash;l</a></footer>
   </div>
 </template>
 
