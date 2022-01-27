@@ -11,7 +11,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "register-service-worker": "^1.6.2",
-    "three": "^0.108.0",
+    "three": "^0.137.0",
     "three-orbitcontrols": "^2.108.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3"
